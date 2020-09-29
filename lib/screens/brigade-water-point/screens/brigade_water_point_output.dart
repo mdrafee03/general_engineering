@@ -12,6 +12,22 @@ class BrigadeWaterPointOutput extends StatelessWidget {
   final slForWater = SerialManage();
   final slForTime = SerialManage();
 
+  Text buildItem(String text) {
+    return Text(
+      text,
+      style: TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+
+  TableCell buildTableHeader(String title) {
+    return TableCell(
+      child: Text(
+        title,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final BrigadeWaterPoint _model = ModalRoute.of(context).settings.arguments;
@@ -52,7 +68,7 @@ class BrigadeWaterPointOutput extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    buildItem(
                       "1. Total Water available in the source = ${_model.totalWaterAval} gals",
                     ),
                     SectionSubHeading(
@@ -71,7 +87,7 @@ class BrigadeWaterPointOutput extends StatelessWidget {
                                 (i, value) => MapEntry(
                                   i,
                                   Text(
-                                    "${slForWater.serial}. ${value.name} = ${value.waterRequire} gals",
+                                    "${slForWater.serial}. ${value.name} = ${value.number} x ${_model.consumption} = ${value.waterRequire} gals",
                                   ),
                                 ),
                               )
@@ -83,10 +99,10 @@ class BrigadeWaterPointOutput extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text(
+                    buildItem(
                       "3. Can Provides Water for = ${_model.provideWaterInDays} Days",
                     ),
-                    Text(
+                    buildItem(
                       "4. Yield of the water tank = ${_model.yieldWaterTank} gpm",
                     ),
                     SectionSubHeading(
@@ -143,25 +159,20 @@ class BrigadeWaterPointOutput extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(
+                      child: buildItem(
                         "7. Total Time Require = ${_model.totalTimeRequied}",
                       ),
-                    )
+                    ),
+                    Image.asset(
+                      'assets/images/water-point.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  TableCell buildTableHeader(String title) {
-    return TableCell(
-      child: Text(
-        title,
-        style: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
