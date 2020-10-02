@@ -21,8 +21,8 @@ class Home extends StatelessWidget {
             SizedBox(height: 10),
             Button(context, 'Brigade Water Point', brigadeWaterPointList),
             SizedBox(height: 10),
-            Button(
-                context, 'Building Materials Calculation', helipadConstruction),
+            Button(context, 'Building Materials Calculation',
+                buildingMaterialScreen),
             SizedBox(height: 10),
             Button(context, 'Plant Vehicle Capability', helipadConstruction),
             SizedBox(height: 10),
