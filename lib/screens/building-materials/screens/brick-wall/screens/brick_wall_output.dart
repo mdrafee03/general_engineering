@@ -53,7 +53,7 @@ class BrickWallOutput extends StatelessWidget {
                       "b. Volume of Estimated Brickwork = ${_model.volumeOfBrickwork} cft",
                     ),
                     Text(
-                      "c. Number of bricks = ${_model.upperRoundTo(100, _model.numberOfBricks)} Nos",
+                      "c. Number of bricks = ${_model.numberOfBricks} Nos",
                     ),
                   ],
                 ),
