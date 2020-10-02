@@ -15,6 +15,18 @@ class _ConcreteSlabInputState extends State<ConcreteSlabInput> {
   );
 
   final _formKey = GlobalKey<FormState>();
+  Container buildRatioContainer(double property) {
+    return Container(
+      width: 30,
+      height: 30,
+      decoration: BoxDecoration(border: Border.all()),
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        initialValue: property.toString() ?? null,
+        onSaved: (value) => setState(() => property = double.parse(value)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,45 +95,11 @@ class _ConcreteSlabInputState extends State<ConcreteSlabInput> {
                       ),
                       Row(
                         children: [
-                          Container(
-                            width: 20,
-                            height: 25,
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              initialValue:
-                                  _model?.cementRatio?.toString() ?? null,
-                              onSaved: (value) => setState(() =>
-                                  _model.cementRatio = double.parse(value)),
-                            ),
-                          ),
+                          buildRatioContainer(_model.cementRatio),
                           Text(" : "),
-                          Container(
-                            width: 20,
-                            height: 25,
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              initialValue: _model?.faRatio?.toString() ?? null,
-                              onSaved: (value) => setState(
-                                  () => _model.faRatio = double.parse(value)),
-                            ),
-                          ),
+                          buildRatioContainer(_model.faRatio),
                           Text(" : "),
-                          Container(
-                            width: 20,
-                            height: 25,
-                            decoration: BoxDecoration(border: Border.all()),
-                            child: TextFormField(
-                              keyboardType: TextInputType.number,
-                              textAlign: TextAlign.center,
-                              initialValue: _model?.caRatio?.toString() ?? null,
-                              onSaved: (value) => setState(
-                                  () => _model.caRatio = double.parse(value)),
-                            ),
-                          ),
+                          buildRatioContainer(_model.caRatio),
                         ],
                       ),
                     ],

@@ -15,6 +15,18 @@ class _BrickWallInputState extends State<BrickWallInput> {
   );
 
   final _formKey = GlobalKey<FormState>();
+  Container buildRatioContainer(double property) {
+    return Container(
+      width: 30,
+      height: 30,
+      decoration: BoxDecoration(border: Border.all()),
+      child: TextFormField(
+        keyboardType: TextInputType.number,
+        initialValue: property.toString() ?? null,
+        onSaved: (value) => setState(() => property = double.parse(value)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,31 +81,9 @@ class _BrickWallInputState extends State<BrickWallInput> {
                     children: [
                       Text("Cement : Sand"),
                       SizedBox(width: 10),
-                      Container(
-                        width: 20,
-                        height: 25,
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          initialValue: _model?.cementRatio?.toString() ?? null,
-                          onSaved: (value) => setState(
-                              () => _model.cementRatio = double.parse(value)),
-                        ),
-                      ),
+                      buildRatioContainer(_model.cementRatio),
                       Text(" : "),
-                      Container(
-                        width: 20,
-                        height: 25,
-                        decoration: BoxDecoration(border: Border.all()),
-                        child: TextFormField(
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          initialValue: _model?.sandRatio?.toString() ?? null,
-                          onSaved: (value) => setState(
-                              () => _model.sandRatio = double.parse(value)),
-                        ),
-                      ),
+                      buildRatioContainer(_model.sandRatio),
                     ],
                   ),
                 ),
