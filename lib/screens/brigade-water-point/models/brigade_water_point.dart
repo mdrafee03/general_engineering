@@ -1,5 +1,16 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:flutter/material.dart' as m;
+import 'package:flutter/services.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart';
+import 'package:printing/printing.dart';
 
+import '../../../shared/models/serial_manage.dart';
+import '../../../shared/models/utility.dart';
+import '../../../shared/models/utility_pw.dart';
+import '../../../shared/widgets/section_heading_pw.dart';
+import '../../../shared/widgets/section_sub_heading_pw.dart';
+import '../../../shared/widgets/top_header_pw.dart';
 import '../../../shared/extension-methods/timeOfDay_apis.dart';
 import '../models/brigade_group.dart';
 
@@ -11,7 +22,7 @@ class BrigadeWaterPoint {
   double depth3;
   double height;
   double dia;
-  TimeOfDay startTime = TimeOfDay.now();
+  m.TimeOfDay startTime = m.TimeOfDay.now();
   int consumption;
   int numberOfEME;
   int numberOfMP;
@@ -62,7 +73,7 @@ class BrigadeWaterPoint {
   }
 
   List<BrigadeGroup> get runningTime {
-    TimeOfDay current = startTime;
+    m.TimeOfDay current = startTime;
     brigadeGroups.forEach((e) {
       e.from = current;
       e.to = current.addMinutes(e.timeRequire);
@@ -81,10 +92,185 @@ class BrigadeWaterPoint {
     }
   }
 
-  String hourFormat(TimeOfDay time) {
+  String hourFormat(m.TimeOfDay time) {
     String hour = "00" + time.hour.toString();
     String minute = "00" + time.minute.toString();
     return (hour.substring(hour.length - 2) +
         minute.substring(minute.length - 2));
+  }
+
+  Future<void> generatePDF(Document doc) async {
+    final slForWater = SerialManage();
+    final slForTime = SerialManage();
+    Text buildItem(String text) {
+      return Text(
+        text,
+        style: TextStyle(fontWeight: FontWeight.bold),
+      );
+    }
+
+    final PdfImage image = PdfImage.file(
+      doc.document,
+      bytes: (await rootBundle.load('assets/images/water-point.jpg'))
+          .buffer
+          .asUint8List(),
+    );
+    doc.addPage(
+      MultiPage(
+        pageFormat: PdfPageFormat.a4,
+        build: (Context context) {
+          return [
+            TopHeaderPw('Summary of Brigade Water Point '),
+            SectionHeadingPw(
+              "",
+              "Calculation",
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildItem(
+                    "1. Total Water available in the source = $totalWaterAval gals",
+                  ),
+                  SectionSubHeadingPw(
+                    "2. ",
+                    "Total Water Require for Brigade Group",
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...waterRequire
+                            .asMap()
+                            .map(
+                              (i, value) => MapEntry(
+                                i,
+                                Text(
+                                  "${slForWater.serial}. ${value.name} = ${value.number} x $consumption = ${value.waterRequire} gals",
+                                ),
+                              ),
+                            )
+                            .values
+                            .toList(),
+                        Text(
+                          "${slForWater.serial}. Total = $totalWaterRequired",
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildItem(
+                    "3. Can Provides Water for = $provideWaterInDays Days",
+                  ),
+                  buildItem(
+                    "4. Yield of the water tank = $yieldWaterTank gpm",
+                  ),
+                  SectionSubHeadingPw(
+                    "5. ",
+                    "Time Require for Different Units/Sub Units",
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 20),
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ...timeRequire
+                            .asMap()
+                            .map(
+                              (i, value) => MapEntry(
+                                i,
+                                Text(
+                                  "${slForTime.serial}. ${value.name} = ${value.timeRequire} mins",
+                                ),
+                              ),
+                            )
+                            .values
+                            .toList(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SectionSubHeadingPw(
+                    "6. ",
+                    "Running Time",
+                  ),
+                  Table(
+                    border: TableBorder(),
+                    children: [
+                      TableRow(children: [
+                        UtilityPw.buildTableHeader("Unit"),
+                        UtilityPw.buildTableHeader("from"),
+                        UtilityPw.buildTableHeader("to"),
+                      ]),
+                      ...runningTime.map((unit) {
+                        return TableRow(children: [
+                          UtilityPw.buildTableCell(unit.name),
+                          UtilityPw.buildTableCell(hourFormat(unit.from)),
+                          UtilityPw.buildTableCell(hourFormat(unit.to)),
+                        ]);
+                      }).toList(),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 20),
+              alignment: Alignment.topLeft,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: buildItem(
+                      "7. Total Time Require = $totalTimeRequied",
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Image(image)
+          ];
+        },
+      ),
+    );
+  }
+
+  void savePDF(m.BuildContext ctx) async {
+    var doc = Document();
+    await generatePDF(doc);
+    final directory = '/storage/emulated/0/Download';
+    final file = File(
+        "$directory/Brigade-water-point${DateTime.now().millisecondsSinceEpoch}.pdf");
+    await file.writeAsBytes(doc.save());
+    Utility.showPrintedToast(ctx);
+  }
+
+  void sharePDF() async {
+    var doc = Document();
+    await generatePDF(doc);
+    await Printing.sharePdf(
+        bytes: doc.save(), filename: 'Brigade-water-point.pdf');
   }
 }

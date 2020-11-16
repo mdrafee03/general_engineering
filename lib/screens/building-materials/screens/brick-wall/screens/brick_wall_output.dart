@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../../router/route_const.dart';
 import '../../../../../shared/models/serial_manage.dart';
-import '../../../../../shared/widgets/heading_output.dart';
 import '../../../../../shared/widgets/section_heading.dart';
+import '../../../../../shared/widgets/top_header.dart';
 import '../models/brick_wall.dart';
 
 class BrickWallOutput extends StatelessWidget {
@@ -35,7 +35,7 @@ class BrickWallOutput extends StatelessWidget {
           margin: EdgeInsets.all(10),
           child: Column(
             children: [
-              HeadingOutput('Summary of Estimation of Brick Wall '),
+              TopHeader('Summary of Estimation of Brick Wall '),
               SectionHeading(
                 "${slForParent.serialNum} .",
                 "Number of Bricks Calculation",

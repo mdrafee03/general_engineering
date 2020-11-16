@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../router/route_const.dart';
-import '../../../../../shared/widgets/heading_output.dart';
 import '../../../../../shared/widgets/section_heading.dart';
+import '../../../../../shared/widgets/top_header.dart';
 import '../models/concrete_slab.dart';
 
 class ConcreteSlabOutput extends StatelessWidget {
@@ -31,7 +31,7 @@ class ConcreteSlabOutput extends StatelessWidget {
           margin: EdgeInsets.all(10),
           child: Column(
             children: [
-              HeadingOutput('Summary of Estimation of Concrete Slab'),
+              TopHeader('Summary of Estimation of Concrete Slab'),
               SectionHeading(
                 "1 .",
                 "Basic Calculation",

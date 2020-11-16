@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../router/route_const.dart';
 import '../../../shared/models/serial_manage.dart';
-import '../../../shared/widgets/heading_output.dart';
+import '../../../shared/models/utility.dart';
+import '../../../router/route_const.dart';
 import '../../../shared/widgets/section_heading.dart';
 import '../../../shared/widgets/section_sub_heading.dart';
+import '../../../shared/widgets/top_header.dart';
 import '../models/brigade_water_point.dart';
 
 class BrigadeWaterPointOutput extends StatelessWidget {
@@ -47,7 +48,17 @@ class BrigadeWaterPointOutput extends StatelessWidget {
               ModalRoute.withName(home),
             );
           },
-        )
+        ),
+        Builder(builder: (BuildContext ctx) {
+          return IconButton(
+            icon: const Icon(Icons.file_download),
+            onPressed: () => _model.savePDF(ctx),
+          );
+        }),
+        IconButton(
+          icon: const Icon(Icons.share),
+          onPressed: () => _model.sharePDF(),
+        ),
       ],
     );
     return Scaffold(
@@ -57,9 +68,9 @@ class BrigadeWaterPointOutput extends StatelessWidget {
           margin: EdgeInsets.all(10),
           child: Column(
             children: [
-              HeadingOutput('Summary of Brigade Water Point '),
+              TopHeader('Summary of Brigade Water Point '),
               SectionHeading(
-                "${slForParent.serialNum} .",
+                "",
                 "Calculation",
               ),
               Container(
@@ -138,21 +149,16 @@ class BrigadeWaterPointOutput extends StatelessWidget {
                       border: TableBorder.all(),
                       children: [
                         TableRow(children: [
-                          buildTableHeader("Unit"),
-                          buildTableHeader("from"),
-                          buildTableHeader("to"),
+                          Utility.buildTableHeader("Unit"),
+                          Utility.buildTableHeader("from"),
+                          Utility.buildTableHeader("to"),
                         ]),
                         ..._model.runningTime.map((unit) {
                           return TableRow(children: [
-                            TableCell(
-                              child: Text(unit.name),
-                            ),
-                            TableCell(
-                              child: Text(_model.hourFormat(unit.from)),
-                            ),
-                            TableCell(
-                              child: Text(_model.hourFormat(unit.to)),
-                            ),
+                            Utility.buildTableCell(unit.name),
+                            Utility.buildTableCell(
+                                _model.hourFormat(unit.from)),
+                            Utility.buildTableCell(_model.hourFormat(unit.to)),
                           ]);
                         }).toList(),
                       ],
