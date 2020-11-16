@@ -4,6 +4,7 @@ import 'package:dropdown_formfield/dropdown_formfield.dart';
 import '../../../models/general_engineering.dart';
 import '../../../router/route_const.dart';
 import '../../../screens/brigade-water-point/models/brigade_water_point.dart';
+import '../../../shared/widgets/input_submit_button.dart';
 
 class BrigadeWaterPointInput extends StatefulWidget {
   @override
@@ -155,10 +156,7 @@ class _BrigadeWaterPointInputState extends State<BrigadeWaterPointInput> {
                   textField: 'display',
                   valueField: 'value',
                 ),
-                RaisedButton(
-                  onPressed: () => handleSubmit(context),
-                  child: Text('Submit'),
-                )
+                InputSubmitButton(handleSubmit),
               ],
             ),
           ),

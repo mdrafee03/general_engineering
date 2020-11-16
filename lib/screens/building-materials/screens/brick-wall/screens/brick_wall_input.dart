@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../models/general_engineering.dart';
 import '../../../../../router/route_const.dart';
+import '../../../../../shared/widgets/input_submit_button.dart';
 import '../models/brick_wall.dart';
 
 class BrickWallInput extends StatefulWidget {
@@ -87,10 +88,7 @@ class _BrickWallInputState extends State<BrickWallInput> {
                     ],
                   ),
                 ),
-                RaisedButton(
-                  onPressed: () => handleSubmit(context),
-                  child: Text('Submit'),
-                )
+                InputSubmitButton(handleSubmit),
               ],
             ),
           ),

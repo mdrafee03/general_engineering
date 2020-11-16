@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../models/general_engineering.dart';
 import '../../../../../router/route_const.dart';
+import '../../../../../shared/widgets/input_submit_button.dart';
 import '../models/concrete_slab.dart';
 
 class ConcreteSlabInput extends StatefulWidget {
@@ -105,10 +106,7 @@ class _ConcreteSlabInputState extends State<ConcreteSlabInput> {
                     ],
                   ),
                 ),
-                RaisedButton(
-                  onPressed: () => handleSubmit(context),
-                  child: Text('Submit'),
-                )
+                InputSubmitButton(handleSubmit),
               ],
             ),
           ),
