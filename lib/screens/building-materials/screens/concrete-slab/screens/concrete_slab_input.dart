@@ -16,15 +16,15 @@ class _ConcreteSlabInputState extends State<ConcreteSlabInput> {
   );
 
   final _formKey = GlobalKey<FormState>();
-  Container buildRatioContainer(double property) {
+  Container buildRatioContainer(double property, Function onSaved) {
     return Container(
       width: 30,
       height: 30,
       decoration: BoxDecoration(border: Border.all()),
       child: TextFormField(
         keyboardType: TextInputType.number,
-        initialValue: property.toString() ?? null,
-        onSaved: (value) => setState(() => property = double.parse(value)),
+        initialValue: property?.toString() ?? null,
+        onSaved: (value) => onSaved(value),
       ),
     );
   }
@@ -96,11 +96,26 @@ class _ConcreteSlabInputState extends State<ConcreteSlabInput> {
                       ),
                       Row(
                         children: [
-                          buildRatioContainer(_model.cementRatio),
+                          buildRatioContainer(
+                            _model.cementRatio,
+                            (value) => setState(
+                              () => _model.cementRatio = double.parse(value),
+                            ),
+                          ),
                           Text(" : "),
-                          buildRatioContainer(_model.faRatio),
+                          buildRatioContainer(
+                            _model.faRatio,
+                            (value) => setState(
+                              () => _model.faRatio = double.parse(value),
+                            ),
+                          ),
                           Text(" : "),
-                          buildRatioContainer(_model.caRatio),
+                          buildRatioContainer(
+                            _model.caRatio,
+                            (value) => setState(
+                              () => _model.caRatio = double.parse(value),
+                            ),
+                          ),
                         ],
                       ),
                     ],

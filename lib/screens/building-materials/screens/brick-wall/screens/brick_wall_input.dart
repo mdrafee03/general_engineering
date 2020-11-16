@@ -16,15 +16,15 @@ class _BrickWallInputState extends State<BrickWallInput> {
   );
 
   final _formKey = GlobalKey<FormState>();
-  Container buildRatioContainer(double property) {
+  Container buildRatioContainer(double property, Function onSaved) {
     return Container(
       width: 30,
       height: 30,
       decoration: BoxDecoration(border: Border.all()),
       child: TextFormField(
         keyboardType: TextInputType.number,
-        initialValue: property.toString() ?? null,
-        onSaved: (value) => setState(() => property = double.parse(value)),
+        initialValue: property?.toString() ?? null,
+        onSaved: (value) => onSaved(value),
       ),
     );
   }
@@ -82,9 +82,19 @@ class _BrickWallInputState extends State<BrickWallInput> {
                     children: [
                       Text("Cement : Sand"),
                       SizedBox(width: 10),
-                      buildRatioContainer(_model.cementRatio),
+                      buildRatioContainer(
+                        _model.cementRatio,
+                        (value) => setState(
+                          () => _model.cementRatio = double.parse(value),
+                        ),
+                      ),
                       Text(" : "),
-                      buildRatioContainer(_model.sandRatio),
+                      buildRatioContainer(
+                        _model.sandRatio,
+                        (value) => setState(
+                          () => _model.sandRatio = double.parse(value),
+                        ),
+                      ),
                     ],
                   ),
                 ),
