@@ -1,29 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 
-class EarthWorkExcavationScreen extends StatefulWidget {
-  @override
-  _EarthWorkExcavationScreenState createState() =>
-      _EarthWorkExcavationScreenState();
-}
+import '../../../../../shared/widgets/pdf_viewer.dart';
 
-class _EarthWorkExcavationScreenState extends State<EarthWorkExcavationScreen> {
-  final String pdf = 'assets/pdfs/earth_work_excavation_of_roadway.pdf';
-
-  PDFDocument _doc;
-
-  _initState() async {
-    final doc = await PDFDocument.fromAsset(pdf);
-    setState(() {
-      _doc = doc;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initState();
-  }
+class EarthWorkExcavationScreen extends StatelessWidget {
+  final String pdfLink = 'assets/pdfs/earth_work_excavation_of_roadway.pdf';
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +11,7 @@ class _EarthWorkExcavationScreenState extends State<EarthWorkExcavationScreen> {
       appBar: AppBar(
         title: Text("Earth Work Excavation of Roadway"),
       ),
-      body: PDFViewer(
-        document: _doc,
-      ),
+      body: PdfViewer(pdfLink),
     );
   }
 }

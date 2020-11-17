@@ -1,27 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_plugin_pdf_viewer/flutter_plugin_pdf_viewer.dart';
 
-class RetainingWallScreen extends StatefulWidget {
-  @override
-  _RetainingWallScreenState createState() => _RetainingWallScreenState();
-}
+import '../../../../../shared/widgets/pdf_viewer.dart';
 
-class _RetainingWallScreenState extends State<RetainingWallScreen> {
-  final String pdf = 'assets/pdfs/retaining_wall.pdf';
-  PDFDocument _doc;
-
-  _initState() async {
-    final doc = await PDFDocument.fromAsset(pdf);
-    setState(() {
-      _doc = doc;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _initState();
-  }
+class RetainingWallScreen extends StatelessWidget {
+  final String pdfLink = 'assets/pdfs/retaining_wall.pdf';
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +11,7 @@ class _RetainingWallScreenState extends State<RetainingWallScreen> {
       appBar: AppBar(
         title: Text("Retaining Wall"),
       ),
-      body: PDFViewer(
-        document: _doc,
-      ),
+      body: PdfViewer(pdfLink),
     );
   }
 }
