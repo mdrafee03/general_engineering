@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../router/route_const.dart';
 import '../../../shared/widgets/button.dart';
+import '../../../shared/widgets/pdf_button.dart';
 
 class BuildingMaterialScreen extends StatelessWidget {
   @override
@@ -19,20 +20,35 @@ class BuildingMaterialScreen extends StatelessWidget {
             SizedBox(height: 10),
             Button(context, 'Estimation of Concrete Slab', concreteSlabList),
             SizedBox(height: 10),
-            Button(context, 'Estimation of RCC Slab', rccSlab),
+            PdfButton(
+              'Estimation of RCC Slab',
+              'assets/pdfs/RCC_slab.pdf',
+            ),
             SizedBox(height: 10),
-            Button(context, 'Estimation Retaining Wall', retainingWall),
+            PdfButton(
+              'Estimation Retaining Wall',
+              'assets/pdfs/retaining_wall.pdf',
+            ),
             SizedBox(height: 10),
-            Button(context, 'Estimation of Septic Tank', septicTank),
+            PdfButton(
+              'Estimation of Septic Tank',
+              'assets/pdfs/septic_tank.pdf',
+            ),
             SizedBox(height: 10),
-            Button(context, 'Estimation of Underground Water Reservior',
-                undergroundWaterReservior),
+            PdfButton(
+              'Estimation of Underground Water Reservior',
+              'assets/pdfs/underground_water_reservior.pdf',
+            ),
             SizedBox(height: 10),
-            Button(context, 'Estimation Residential Building',
-                residentialBuilding),
+            PdfButton(
+              'Estimation Residential Building',
+              'assets/pdfs/residential_building.pdf',
+            ),
             SizedBox(height: 10),
-            Button(context, 'Estimation of Earth Work Excavation of Roadway',
-                earthWorkExcavation),
+            PdfButton(
+              'Estimation of Earth Work Excavation of Roadway',
+              'assets/pdfs/earth_work_excavation_of_roadway.pdf',
+            ),
           ],
         ),
       ),

@@ -4,21 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:printing/printing.dart';
 
+import '../../shared/models/pdf_model.dart';
+
 class PdfViewer extends StatelessWidget {
-  final String pdfLink;
-
-  PdfViewer(this.pdfLink);
-
-  Future<Uint8List> loadPdf() async {
+  Future<Uint8List> loadPdf(String pdfLink) async {
     final pdf = await rootBundle.load(pdfLink);
     return pdf.buffer.asUint8List();
   }
 
   @override
   Widget build(BuildContext context) {
-    return PdfPreview(
-      build: (format) => loadPdf(),
-      useActions: false,
+    PdfModel _model = ModalRoute.of(context).settings.arguments;
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_model.title),
+      ),
+      body: PdfPreview(
+        build: (format) => loadPdf(_model.pdfLink),
+        useActions: false,
+      ),
     );
   }
 }

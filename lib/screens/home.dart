@@ -47,9 +47,10 @@ class _HomeState extends State<Home> {
               Button(context, 'Building Materials Calculation',
                   buildingMaterialScreen),
               SizedBox(height: 10),
-              Button(context, 'Plant Vehicle Capability', helipadConstruction),
+              Button(
+                  context, 'Plant Vehicle Capability', plantVehicleCapability),
               SizedBox(height: 10),
-              Button(context, 'Books Copy', helipadConstruction),
+              Button(context, 'Books Copy', booksCopy),
             ],
           ),
         ),
