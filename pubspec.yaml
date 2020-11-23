@@ -31,3 +31,7 @@ flutter:
   assets:
     - assets/images/
     - assets/pdfs/
+flutter_icons:
+  image_path: assets/images/icons/logo.png
+  android: true
+  ios: true
