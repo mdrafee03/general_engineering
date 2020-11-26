@@ -233,6 +233,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.1"
+  passcode_screen:
+    dependency: "direct main"
+    description:
+      name: passcode_screen
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.2+1"
   path:
     dependency: transitive
     description:
