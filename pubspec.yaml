@@ -31,6 +31,11 @@ flutter:
   assets:
     - assets/images/
     - assets/pdfs/
+    - assets/pdfs/cep/
+    - assets/pdfs/bomb-reconnaissance/
+    - assets/pdfs/espbd/
+    - assets/pdfs/espbr/
+    - assets/pdfs/handbook/
 flutter_icons:
   image_path: assets/images/icons/logo.png
   android: true

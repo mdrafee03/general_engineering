@@ -20,3 +20,11 @@ const String concreteSlabOutput = '/building-material/concrete-slab/output';
 
 const String plantVehicleCapability = '/plant-vehicle-capability';
 const String booksCopy = '/books-copy';
+const String bombReconnaissance = '/books-copy/bomb-reconnaissance';
+const String combatEngineeringProject =
+    '/books-copy/combat-engineering-porject';
+const String engineeringPocketBookDemolition =
+    '/books-copy/engineering-pocket-book-demolition';
+const String engineeringPocketBookRoads =
+    '/books-copy/engineering-pocket-book-roads';
+const String handBook = '/books-copy/hand-book';

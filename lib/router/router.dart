@@ -14,8 +14,13 @@ import '../screens/building-materials/screens/concrete-slab/screens/concrete_sla
 import '../screens/building-materials/screens/concrete-slab/screens/concrete_slab_list.dart';
 import '../screens/building-materials/screens/concrete-slab/screens/concrete_slab_output.dart';
 import '../screens/plant-vehicle/plant_vehicle_screen.dart';
-import '../screens/books-copy/books_copy.dart';
+import '../screens/books-copy/screens/books_copy_screen.dart';
 import '../shared/widgets/pdf_viewer.dart';
+import '../screens/books-copy/screens/bomb_reconnaissance.dart';
+import '../screens/books-copy/screens/combat_engineering_project.dart';
+import '../screens/books-copy/screens/engineers_pocket_book_demolition.dart';
+import '../screens/books-copy/screens/engineers_pocket_book_roads.dart';
+import '../screens/books-copy/screens/handbook.dart';
 import './route_const.dart';
 
 class Router {
@@ -37,7 +42,15 @@ class Router {
       concreteSlabInput: (BuildContext ctx) => ConcreteSlabInput(),
       concreteSlabOutput: (BuildContext ctx) => ConcreteSlabOutput(),
       plantVehicleCapability: (BuildContext ctx) => PlantVehicleScreeen(),
-      booksCopy: (BuildContext ctx) => BooksCopy(),
+      booksCopy: (BuildContext ctx) => BooksCopyScreen(),
+      bombReconnaissance: (BuildContext ctx) => BombReconnaissance(),
+      combatEngineeringProject: (BuildContext ctx) =>
+          CombatEngineeringProject(),
+      engineeringPocketBookDemolition: (BuildContext ctx) =>
+          EngineersPocketBookDemolition(),
+      engineeringPocketBookRoads: (BuildContext ctx) =>
+          EngineersPocketBookRoads(),
+      handBook: (BuildContext ctx) => HandBook(),
     };
   }
 }

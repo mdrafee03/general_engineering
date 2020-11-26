@@ -13,7 +13,7 @@ class BrigadeWaterPointInput extends StatefulWidget {
 
 class _BrigadeWaterPointInputState extends State<BrigadeWaterPointInput> {
   final appBar = AppBar(
-    title: Text('Baily Bridge'),
+    title: Text('Bridgade Water Point'),
   );
 
   final _formKey = GlobalKey<FormState>();
