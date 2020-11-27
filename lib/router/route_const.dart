@@ -1,5 +1,5 @@
-const String home = '/';
-
+const String lockScreen = '/';
+const String home = '/home';
 const String pdfViewer = '/pdf-viewer';
 const String bookCover = '/book-cover';
 

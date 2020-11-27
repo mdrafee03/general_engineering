@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:general_engineering/screens/lock_screen.dart';
 import 'package:general_engineering/shared/widgets/button_with_image.dart';
 
 import '../screens/brigade-water-point/screens/brigade_water_point_input.dart';
@@ -27,6 +28,7 @@ import './route_const.dart';
 class Router {
   static Map<String, WidgetBuilder> mainRouter() {
     return <String, WidgetBuilder>{
+      lockScreen: (BuildContext ctx) => LockScreen(),
       home: (BuildContext ctx) => Home(),
       pdfViewer: (BuildContext ctx) => PdfViewer(),
       bookCover: (BuildContext ctx) => ButtonWithImage(),

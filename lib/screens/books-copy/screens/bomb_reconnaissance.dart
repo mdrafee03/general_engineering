@@ -233,7 +233,7 @@ class BombReconnaissance extends StatelessWidget {
             ),
             BookButton(
               'A. Bomb Disposal Policy',
-              pdfLink(''),
+              pdfLink('Ser-48-1Anx'),
             ),
             BookButton(
               'B. Disposal Of Stray Ammunition',
