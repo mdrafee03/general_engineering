@@ -28,24 +28,31 @@ class BrigadeWaterPoint {
   int numberOfMP;
   int numberOfOther;
   List<BrigadeGroup> brigadeGroups = BrigadeGroup.brigadeGroups;
+  List<BrigadeGroup> selectedPriotityBgdGroup = [];
   void updateBrigadeGroup() {
-    var eme = brigadeGroups.where((element) => element.name == "EME");
-    var mp = brigadeGroups.where((element) => element.name == "MP");
-    var other = brigadeGroups.where((element) => element.name == "Other");
+    var eme =
+        selectedPriotityBgdGroup.where((element) => element.name == "EME");
+    var mp = selectedPriotityBgdGroup.where((element) => element.name == "MP");
+    var other =
+        selectedPriotityBgdGroup.where((element) => element.name == "Other");
     if (numberOfEME != 0 && eme.isEmpty)
-      brigadeGroups.add(BrigadeGroup(name: "EME", number: numberOfEME));
+      selectedPriotityBgdGroup
+          .add(BrigadeGroup(name: "EME", number: numberOfEME));
     if (numberOfMP != 0 && mp.isEmpty)
-      brigadeGroups.add(BrigadeGroup(name: "MP", number: numberOfMP));
+      selectedPriotityBgdGroup
+          .add(BrigadeGroup(name: "MP", number: numberOfMP));
     if (numberOfOther != 0 && other.isEmpty)
-      brigadeGroups.add(BrigadeGroup(name: "Other", number: numberOfOther));
+      selectedPriotityBgdGroup
+          .add(BrigadeGroup(name: "Other", number: numberOfOther));
     if (numberOfEME == 0 && eme.isNotEmpty) {
-      brigadeGroups.removeWhere((element) => element.name == "EME");
+      selectedPriotityBgdGroup.removeWhere((element) => element.name == "EME");
     }
     if (numberOfMP == 0 && mp.isNotEmpty) {
-      brigadeGroups.removeWhere((element) => element.name == "MP");
+      selectedPriotityBgdGroup.removeWhere((element) => element.name == "MP");
     }
     if (numberOfOther == 0 && mp.isNotEmpty) {
-      brigadeGroups.removeWhere((element) => element.name == "Other");
+      selectedPriotityBgdGroup
+          .removeWhere((element) => element.name == "Other");
     }
   }
 
@@ -55,12 +62,13 @@ class BrigadeWaterPoint {
   }
 
   List<BrigadeGroup> get waterRequire {
-    brigadeGroups.forEach((e) => e.waterRequire = e.number * consumption);
-    return brigadeGroups;
+    selectedPriotityBgdGroup
+        .forEach((e) => e.waterRequire = e.number * consumption);
+    return selectedPriotityBgdGroup;
   }
 
   int get totalWaterRequired {
-    return brigadeGroups.fold(
+    return selectedPriotityBgdGroup.fold(
         0, (previousValue, element) => previousValue + element.waterRequire);
   }
 
@@ -73,24 +81,24 @@ class BrigadeWaterPoint {
   }
 
   List<BrigadeGroup> get timeRequire {
-    brigadeGroups.forEach(
+    selectedPriotityBgdGroup.forEach(
       (e) => e.timeRequire = (e.waterRequire / yieldWaterTank).ceil(),
     );
-    return brigadeGroups;
+    return selectedPriotityBgdGroup;
   }
 
   List<BrigadeGroup> get runningTime {
     m.TimeOfDay current = startTime;
-    brigadeGroups.forEach((e) {
+    selectedPriotityBgdGroup.forEach((e) {
       e.from = current;
       e.to = current.addMinutes(e.timeRequire);
       current = e.to;
     });
-    return brigadeGroups;
+    return selectedPriotityBgdGroup;
   }
 
   String get totalTimeRequied {
-    int time = brigadeGroups.fold(
+    int time = selectedPriotityBgdGroup.fold(
         0, (previousValue, element) => previousValue + element.timeRequire);
     if (time > 60) {
       return "${time ~/ 60} hours ${time % 60} minutes";

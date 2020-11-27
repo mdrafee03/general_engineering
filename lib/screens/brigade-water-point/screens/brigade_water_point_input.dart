@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_formfield/dropdown_formfield.dart';
+import 'package:general_engineering/screens/brigade-water-point/models/brigade_group.dart';
 
 import '../../../models/general_engineering.dart';
 import '../../../router/route_const.dart';
@@ -160,6 +161,46 @@ class _BrigadeWaterPointInputState extends State<BrigadeWaterPointInput> {
                   onChanged: (int value) {
                     setState(() {
                       _model.consumption = value;
+                    });
+                  },
+                  textField: 'display',
+                  valueField: 'value',
+                ),
+                Wrap(
+                  spacing: 10,
+                  children: [
+                    ..._model.selectedPriotityBgdGroup
+                        .asMap()
+                        .map(
+                          (i, value) => MapEntry(
+                              i,
+                              InputChip(
+                                label: Text(value.name),
+                                onDeleted: () {
+                                  setState(() {
+                                    _model.selectedPriotityBgdGroup.removeAt(i);
+                                  });
+                                },
+                              )),
+                        )
+                        .values
+                        .toList(),
+                  ],
+                ),
+                DropDownFormField(
+                  titleText: 'Select Priority of Arms',
+                  hintText: 'Select Priority of Arms',
+                  filled: false,
+                  dataSource: _model.brigadeGroups.map((e) {
+                    return {"display": e.name, "value": e};
+                  }).toList(),
+                  onChanged: (BrigadeGroup value) {
+                    setState(() {
+                      print(value.name);
+                      var found = _model.selectedPriotityBgdGroup
+                          .where((element) => element.name == value.name);
+                      if (found.isEmpty)
+                        _model.selectedPriotityBgdGroup.add(value);
                     });
                   },
                   textField: 'display',
