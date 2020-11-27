@@ -121,6 +121,15 @@ class _BrigadeWaterPointInputState extends State<BrigadeWaterPointInput> {
                   onChanged: (value) =>
                       setState(() => _model.numberOfMP = int.parse(value)),
                 ),
+                TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "Troops attached from Other Arms",
+                      labelText: "Troops attached from Other Arms (Nos)"),
+                  keyboardType: TextInputType.number,
+                  initialValue: _model?.numberOfOther?.toString() ?? null,
+                  onChanged: (value) =>
+                      setState(() => _model.numberOfOther = int.parse(value)),
+                ),
                 ListTile(
                   title: Text(
                     "Start Time: ${_model.startTime.format(context)}",

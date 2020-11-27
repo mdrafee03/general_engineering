@@ -4,8 +4,7 @@ class ButtonWithArgument extends StatelessWidget {
   final String text;
   final String routeName;
   final Object argument;
-  const ButtonWithArgument(
-      BuildContext context, this.text, this.routeName, this.argument);
+  const ButtonWithArgument(this.text, this.routeName, this.argument);
 
   @override
   Widget build(context) {

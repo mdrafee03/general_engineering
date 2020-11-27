@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:general_engineering/shared/widgets/button_with_image.dart';
 
 import '../screens/brigade-water-point/screens/brigade_water_point_input.dart';
 import '../screens/brigade-water-point/screens/brigade_water_point_list.dart';
@@ -28,6 +29,7 @@ class Router {
     return <String, WidgetBuilder>{
       home: (BuildContext ctx) => Home(),
       pdfViewer: (BuildContext ctx) => PdfViewer(),
+      bookCover: (BuildContext ctx) => ButtonWithImage(),
       airstripConstruction: (BuildContext ctx) => AirstripConstructionScreeen(),
       helipadConstruction: (BuildContext ctx) => HelipadConstructionScreeen(),
       brigadeWaterPointList: (BuildContext ctx) => BrigadeWaterPointList(),

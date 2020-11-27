@@ -26,19 +26,26 @@ class BrigadeWaterPoint {
   int consumption;
   int numberOfEME;
   int numberOfMP;
+  int numberOfOther;
   List<BrigadeGroup> brigadeGroups = BrigadeGroup.brigadeGroups;
   void updateBrigadeGroup() {
     var eme = brigadeGroups.where((element) => element.name == "EME");
     var mp = brigadeGroups.where((element) => element.name == "MP");
+    var other = brigadeGroups.where((element) => element.name == "Other");
     if (numberOfEME != 0 && eme.isEmpty)
       brigadeGroups.add(BrigadeGroup(name: "EME", number: numberOfEME));
     if (numberOfMP != 0 && mp.isEmpty)
       brigadeGroups.add(BrigadeGroup(name: "MP", number: numberOfMP));
+    if (numberOfOther != 0 && other.isEmpty)
+      brigadeGroups.add(BrigadeGroup(name: "Other", number: numberOfOther));
     if (numberOfEME == 0 && eme.isNotEmpty) {
       brigadeGroups.removeWhere((element) => element.name == "EME");
     }
     if (numberOfMP == 0 && mp.isNotEmpty) {
       brigadeGroups.removeWhere((element) => element.name == "MP");
+    }
+    if (numberOfOther == 0 && mp.isNotEmpty) {
+      brigadeGroups.removeWhere((element) => element.name == "Other");
     }
   }
 

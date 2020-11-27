@@ -1,6 +1,7 @@
 const String home = '/';
 
 const String pdfViewer = '/pdf-viewer';
+const String bookCover = '/book-cover';
 
 const String airstripConstruction = '/airstrip-construction';
 const String helipadConstruction = '/helipad-construction';
