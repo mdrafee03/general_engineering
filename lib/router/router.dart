@@ -25,7 +25,7 @@ import '../screens/books-copy/screens/engineers_pocket_book_roads.dart';
 import '../screens/books-copy/screens/handbook.dart';
 import './route_const.dart';
 
-class Router {
+class RouterApp {
   static Map<String, WidgetBuilder> mainRouter() {
     return <String, WidgetBuilder>{
       lockScreen: (BuildContext ctx) => LockScreen(),
